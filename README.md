@@ -1,6 +1,6 @@
 # 🌐 Centralized-network-access-topology
 
-This repository documents the **cloud-based network lab topology** running on Proxmox VE with routing, VLANs, DHCP, wireless integration, monitoring, and role-based authentication.  
+This repository documents the **centralized-network-access-topology** running on Proxmox VE with routing, VLANs, DHCP, wireless integration, monitoring, and role-based authentication.  
 The lab simulates a centralized infrastructure with branch routers, access points, and centralized identity management.
 
 ---
