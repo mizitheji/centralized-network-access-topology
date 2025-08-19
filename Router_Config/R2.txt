@@ -1,0 +1,50 @@
+!
+hostname R2
+!
+ip dhcp excluded-address 172.20.2.1 172.20.2.10
+ip dhcp excluded-address 172.19.2.1 172.19.2.10
+!
+ip dhcp pool vlan10
+ network 172.20.2.0 255.255.255.0
+ default-router 172.20.2.1
+ dns-server 192.168.100.30
+!
+ip dhcp pool vlan20
+ network 172.19.2.0 255.255.255.0
+ default-router 172.19.2.1
+ dns-server 192.168.100.30
+!
+interface Loopback0
+ ip address 2.2.2.2 255.255.255.255
+!
+interface GigabitEthernet0/0/0
+ description Link to R1
+ ip address 192.168.2.2 255.255.255.252
+ ip ospf network point-to-point
+ negotiation auto
+!
+interface GigabitEthernet0/0/3
+ description LAN SWITCH
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0/0/3.1
+ encapsulation dot1Q 1
+ ip address 10.2.2.1 255.255.255.0
+!
+interface GigabitEthernet0/0/3.10
+ encapsulation dot1Q 10
+ ip address 172.20.2.1 255.255.255.0
+!
+interface GigabitEthernet0/0/3.20
+ encapsulation dot1Q 20
+ ip address 172.19.2.1 255.255.255.0
+!
+router ospf 1
+ router-id 2.2.2.2
+ network 2.2.2.2 0.0.0.0 area 2
+ network 10.2.2.0 0.0.0.255 area 2
+ network 172.19.2.0 0.0.0.255 area 2
+ network 172.20.2.0 0.0.0.255 area 2
+ network 192.168.2.0 0.0.0.3 area 2
+!
